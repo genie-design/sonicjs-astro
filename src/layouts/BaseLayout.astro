@@ -1,0 +1,37 @@
+---
+import Header from '../components/Header';
+
+import '../styles/global.astro';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>{title} | Brown Dog Biscuits</title>
+  </head>
+  <body>
+    <div class='app'>
+      <Header client:load />
+      <main class='main-content' role='main'>
+        <slot />
+      </main>
+      <footer class='footer-content'>
+        <div class='footer-logo'>
+          <span class='brand-name'>BROWN DOG BISCUITS</span>
+        </div>
+        <nav class='footer-nav'>
+          <a href='/' class='nav-link'>Home</a>
+          <a href='/contact' class='nav-link'>Contact</a>
+        </nav>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -27,3 +27,5 @@ export const getFieldDefinitions = (tableConfig: ApiConfig, record?: any) => {
 
   return formFields;
 };
+
+export type FormFields = ReturnType<typeof getFieldDefinitions>;

@@ -21,6 +21,8 @@ import { useEffect, useMemo, useState } from 'react';
 import DeleteConfirmation from './delete-confirmation';
 import { Button } from '@headlessui/react';
 import { TableSearch } from './table-search';
+import type { ApiConfig } from '@/db/routes';
+import type { FormFields } from '@/services/fields';
 
 const columnHelper = createColumnHelper();
 
@@ -35,8 +37,8 @@ function Table({
   tableConfig,
   formFields
 }: {
-  tableConfig: any;
-  formFields: any;
+  tableConfig: ApiConfig;
+  formFields: FormFields;
 }) {
   // debugger;
   const [loading, setLoading] = useState(true);

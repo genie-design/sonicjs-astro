@@ -1,0 +1,96 @@
+---
+import ContentLayout from '@/layouts/ContentLayout.astro';
+
+const userData = Astro.locals.user;
+---
+
+<ContentLayout title='My Account'>
+  <div class='account-section'>
+    <h1>My Account</h1>
+
+    <div class='account-info-card'>
+      <h2>Personal Information</h2>
+      <div class='info-grid'>
+        <div class='info-group'>
+          <label>First Name</label>
+          <p>{userData?.firstName || 'Not provided'}</p>
+        </div>
+
+        <div class='info-group'>
+          <label>Last Name</label>
+          <p>{userData?.lastName || 'Not provided'}</p>
+        </div>
+
+        <div class='info-group'>
+          <label>Email</label>
+          <p>{userData?.email}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ContentLayout>
+
+<style>
+  .account-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    color: var(--color-primary);
+    margin-bottom: 2rem;
+  }
+
+  .account-info-card {
+    background-color: var(--color-primary-light);
+    border-radius: 0.5rem;
+    padding: 2rem;
+  }
+
+  .account-info-card h2 {
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .info-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .info-group label {
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  .info-group p {
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+  }
+
+  .role-badge {
+    display: inline-block;
+    background-color: var(--color-accent-light);
+    color: var(--color-accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+  }
+
+  @media (min-width: 640px) {
+    .info-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

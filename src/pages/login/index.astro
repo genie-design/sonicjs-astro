@@ -1,0 +1,109 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+import '@/styles/forms.astro';
+const errors = { email: '', password: '' };
+
+if (Astro.request.method === 'POST') {
+  try {
+    const data = await Astro.request.formData();
+    const email = data.get('email');
+    const password = data.get('password');
+
+    // Basic validation
+    if (typeof email !== 'string' || !email.includes('@')) {
+      errors.email = 'Please enter a valid email address';
+    }
+    if (typeof password !== 'string' || password.length < 1) {
+      errors.password = 'Password is required';
+    }
+
+    const hasErrors = Object.values(errors).some((msg) => msg);
+
+    if (!hasErrors) {
+      try {
+        // Get the user key
+        const key = await Astro.locals.auth.useKey({
+          provider: 'EMAIL',
+          providerUserId: email as string,
+          password: password as string
+        });
+
+        if (key) {
+          // Get associated user
+          const user = await Astro.locals.auth.getUser(key.user_id);
+
+          if (user) {
+            // Create new session
+            const session = await Astro.locals.auth.createSession({
+              userId: user.id,
+              attributes: {}
+            });
+
+            // Set session cookie
+            Astro.cookies.set('session', session.session.id, {
+              path: '/',
+              secure: true,
+              httpOnly: true,
+              sameSite: 'lax',
+              maxAge: 60 * 60 * 24 * 14 // 14 days
+            });
+
+            return Astro.redirect('/');
+          } else {
+            errors.password = 'Invalid email or password';
+          }
+        }
+      } catch (e) {
+        if (e instanceof Error) {
+          console.error(e.message);
+          errors.password = 'Invalid email or password';
+        }
+      }
+    }
+  } catch (e) {
+    if (e instanceof Error) {
+      console.error(e.message);
+    }
+  }
+}
+---
+
+<ContentLayout title='Login'>
+  <div class='form-section'>
+    <h2>Sign In</h2>
+    <form class='form' method='POST'>
+      <div class='form-group'>
+        <label for='email'>Email Address:</label>
+        <input
+          id='email'
+          name='email'
+          type='email'
+          autocomplete='email'
+          required
+        />
+        {errors.email && <p class='error-message'>{errors.email}</p>}
+      </div>
+
+      <div class='form-group'>
+        <div class='password-header'>
+          <label for='password'>Password:</label>
+        </div>
+        <input
+          id='password'
+          name='password'
+          type='password'
+          autocomplete='current-password'
+          required
+        />
+        {errors.password && <p class='error-message'>{errors.password}</p>}
+      </div>
+
+      <button type='submit' class='submit-button'>Sign In</button>
+    </form>
+
+    <p class='register-link'>
+      Don't have an account? <a href='/register'>Register now</a>
+    </p>
+  </div>
+</ContentLayout>

@@ -1,5 +1,50 @@
 ---
 import ContentLayout from '@/layouts/ContentLayout.astro';
+import '@/styles/forms.astro';
+import { table as userComments } from '@/db/schema/user-comments';
+import { nanoid } from 'nanoid';
+
+const db = Astro.locals.auth.config.db;
+
+let formSuccess = false;
+let formError = '';
+
+if (Astro.request.method === 'POST') {
+  try {
+    const data = await Astro.request.formData();
+    const name = data.get('name');
+    const email = data.get('email');
+    const subject = data.get('subject');
+    const message = data.get('message');
+
+    if (
+      !name ||
+      !email ||
+      !subject ||
+      !message ||
+      typeof name !== 'string' ||
+      typeof email !== 'string' ||
+      typeof subject !== 'string' ||
+      typeof message !== 'string'
+    ) {
+      formError = 'Please fill out all fields correctly.';
+    } else {
+      await db.insert(userComments).values({
+        id: nanoid(),
+        name,
+        email,
+        subject,
+        message,
+        userId: Astro.locals.user?.id
+      });
+
+      formSuccess = true;
+    }
+  } catch (error) {
+    console.error('Error saving contact message:', error);
+    formError = 'There was an error sending your message. Please try again.';
+  }
+}
 ---
 
 <ContentLayout title='Contact'>
@@ -29,37 +74,64 @@ import ContentLayout from '@/layouts/ContentLayout.astro';
       </div>
     </div>
 
-    <div class='contact-form-card'>
+    <div class='contact-form-card form-section'>
       <h2>Send Us a Message</h2>
-      <form class='contact-form' action='#' method='POST'>
-        <div class='form-group'>
-          <label for='name'>Name:</label>
-          <input type='text' id='name' name='name' required='' />
-        </div>
+      {
+        formSuccess && (
+          <div class='success-message'>
+            Thank you for your message! We'll get back to you soon.
+          </div>
+        )
+      }
+      {formError && <div class='error-message'>{formError}</div>}
 
-        <div class='form-group'>
-          <label for='email'>Email:</label>
-          <input type='email' id='email' name='email' required='' />
-        </div>
+      {
+        !formSuccess && (
+          <form class='form' method='POST'>
+            <div class='form-group'>
+              <label for='name'>Name:</label>
+              <input
+                type='text'
+                id='name'
+                name='name'
+                required=''
+                value={`${Astro.locals.user?.firstName} ${Astro.locals.user?.lastName}`}
+              />
+            </div>
 
-        <div class='form-group'>
-          <label for='subject'>Subject:</label>
-          <select id='subject' name='subject' required=''>
-            <option value=''>Select a subject</option>
-            <option value='order'>Place an Order</option>
-            <option value='question'>Product Question</option>
-            <option value='wholesale'>Wholesale Inquiry</option>
-            <option value='other'>Other</option>
-          </select>
-        </div>
+            <div class='form-group'>
+              <label for='email'>Email:</label>
+              <input
+                type='email'
+                id='email'
+                name='email'
+                required=''
+                value={Astro.locals.user?.email}
+              />
+            </div>
 
-        <div class='form-group'>
-          <label for='message'>Message:</label>
-          <textarea id='message' name='message' rows='5' required=''></textarea>
-        </div>
+            <div class='form-group'>
+              <label for='subject'>Subject:</label>
+              <select id='subject' name='subject' required=''>
+                <option value=''>Select a subject</option>
+                <option value='order'>Place an Order</option>
+                <option value='question'>Product Question</option>
+                <option value='wholesale'>Wholesale Inquiry</option>
+                <option value='other'>Other</option>
+              </select>
+            </div>
 
-        <button type='submit' class='cta-button'>Send Message</button>
-      </form>
+            <div class='form-group'>
+              <label for='message'>Message:</label>
+              <textarea id='message' name='message' rows='5' required='' />
+            </div>
+
+            <button type='submit' class='cta-button'>
+              Send Message
+            </button>
+          </form>
+        )
+      }
     </div>
   </div>
 </ContentLayout>
@@ -70,6 +142,9 @@ import ContentLayout from '@/layouts/ContentLayout.astro';
     grid-template-columns: 1fr;
     gap: 2rem;
     margin-bottom: 2rem;
+  }
+  .form-section.contact-form-card {
+    margin: 0;
   }
 
   .contact-info-card,
@@ -110,41 +185,6 @@ import ContentLayout from '@/layouts/ContentLayout.astro';
     height: 24px;
   }
 
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .form-group label {
-    color: var(--color-primary);
-    font-weight: bold;
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    padding: 0.75rem;
-    border: 1px solid var(--color-primary);
-    border-radius: 0.25rem;
-    font-family: inherit;
-    font-size: 1rem;
-  }
-
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 2px var(--color-accent-light);
-  }
-
   @media (min-width: 768px) {
     .contact-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -155,5 +195,21 @@ import ContentLayout from '@/layouts/ContentLayout.astro';
     .content-container {
       padding: 3rem;
     }
+  }
+
+  .success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
   }
 </style>

@@ -58,7 +58,7 @@
   .top-nav {
     display: flex;
     align-items: center;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem;
     background-color: var(--color-secondary);
     color: var(--color-secondary-light);
     border-bottom: 1px solid var(--color-accent);
@@ -186,7 +186,7 @@
   }
 
   .card-container {
-    display: flex;
+    display: grid;
     justify-content: center;
     gap: 1rem;
     background-color: transparent;
@@ -347,6 +347,53 @@
     justify-content: center;
   }
 
+  .mobile-menu-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem 0.5rem 0;
+  }
+
+  .hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-secondary-light);
+    position: relative;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--color-secondary-light);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .hamburger::before {
+    transform: translateY(-8px);
+  }
+
+  .hamburger::after {
+    transform: translateY(8px);
+  }
+
+  .hamburger.open {
+    background: transparent;
+  }
+
+  .hamburger.open::before {
+    transform: rotate(45deg);
+  }
+
+  .hamburger.open::after {
+    transform: rotate(-45deg);
+  }
+
   @media (min-width: 640px) {
     .main-logo {
       width: 20rem;
@@ -365,6 +412,9 @@
     }
     .main-content {
       background-image: url('/images/background/home_768.jpeg');
+    }
+    .featured-card-container {
+      grid-template-columns: repeat(2, max-content);
     }
     .basic-card-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -387,7 +437,9 @@
     .main-content {
       background-image: url('/images/background/home_1024.jpeg');
     }
-
+    .featured-card-container {
+      grid-template-columns: repeat(3, max-content);
+    }
     .basic-card-grid-3 {
       grid-template-columns: repeat(3, 1fr);
     }
@@ -417,6 +469,53 @@
     }
     .main-content {
       background-image: url('/images/background/home_1536.jpeg');
+    }
+  }
+  @media (max-width: 767px) {
+    .mobile-menu-button {
+      display: block;
+    }
+
+    .main-nav {
+      position: fixed;
+      top: 108px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--color-accent);
+      padding: 1rem;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      flex-direction: column;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+
+    .main-nav.mobile-menu-open {
+      transform: translateX(0);
+    }
+
+    .nav-item {
+      width: 100%;
+      padding: 0.5rem 0;
+    }
+
+    .nav-link {
+      display: block;
+      width: 100%;
+    }
+
+    .dropdown {
+      position: static;
+      opacity: 1;
+      transform: none;
+      border: none;
+      background: transparent;
+      padding-left: 1rem;
+    }
+
+    .nav-item:hover .dropdown {
+      position: static;
     }
   }
 </style>

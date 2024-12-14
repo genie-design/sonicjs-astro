@@ -5,6 +5,8 @@ import * as categories from './schema/categories';
 import * as categoriesToPosts from './schema/categoriesToPosts';
 import * as userKeys from './schema/userKeys';
 import * as userSessions from './schema/userSessions';
+import * as orders from './schema/orders';
+import * as userComments from './schema/user-comments';
 
 // import { AppContext } from '../server';
 import { isAdminOrEditor } from './config-helpers';
@@ -215,7 +217,9 @@ export const tableSchemas = {
   categories,
   categoriesToPosts,
   userKeys,
-  userSessions
+  userSessions,
+  orders,
+  userComments
 };
 
 export const schema = {
@@ -232,7 +236,11 @@ export const schema = {
     commentsRelations: comments.relation,
     categories: categories.table,
     categoriesToPosts: categoriesToPosts.table,
-    categoriesToPostsRelations: categoriesToPosts.relation
+    categoriesToPostsRelations: categoriesToPosts.relation,
+    orders: orders.table,
+    ordersRelations: orders.relation,
+    userComments: userComments.table,
+    userCommentsRelations: userComments.relation
   }
 };
 

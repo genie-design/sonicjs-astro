@@ -19,7 +19,7 @@ const { title } = Astro.props;
   </head>
   <body>
     <div class='app'>
-      <Header client:load />
+      <Header client:load user={Astro.locals.user?.firstName} />
       <main class='main-content' role='main'>
         <slot />
       </main>

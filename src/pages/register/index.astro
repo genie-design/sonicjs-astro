@@ -1,0 +1,123 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+import '@/styles/forms.astro';
+const errors = { username: '', email: '', password: '' };
+if (Astro.request.method === 'POST') {
+  try {
+    const data = await Astro.request.formData();
+    const firstName = data.get('firstName');
+    const lastName = data.get('lastName');
+    let email = data.get('email');
+    const password = data.get('password');
+    const confirmPassword = data.get('confirmPassword');
+
+    if (confirmPassword !== password) {
+      errors.password += 'Password and confirm password do not match. ';
+    }
+    if (typeof email !== 'string' || !email.includes('@')) {
+      errors.email += 'Email is not valid. ';
+    } else if (await Astro.locals.auth.getUserByEmail(email)) {
+      errors.email += 'Email is already registered. ';
+    }
+    if (typeof password !== 'string' || password.length < 6) {
+      errors.password += 'Password must be at least 6 characters. ';
+    }
+
+    email = email as string;
+    const hasErrors = Object.values(errors).some((msg) => msg);
+    if (!hasErrors) {
+      await Astro.locals.auth.createUser({
+        key: {
+          password: password as string,
+          provider: 'EMAIL',
+          provider_user_id: email
+        },
+        attributes: {
+          email,
+          firstName: typeof firstName === 'string' ? firstName : '',
+          lastName: typeof lastName === 'string' ? lastName : '',
+          role: 'user'
+        }
+      });
+      return Astro.redirect('/login');
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
+---
+
+<ContentLayout title='Register'>
+  <div class='form-section'>
+    <h2>Create Account</h2>
+    <form class='form' method='POST'>
+      <div class='form-row'>
+        <div class='form-group'>
+          <label for='firstName'>First Name:</label>
+          <input
+            id='firstName'
+            name='firstName'
+            type='text'
+            autocomplete='given-name'
+            required
+          />
+        </div>
+
+        <div class='form-group'>
+          <label for='lastName'>Last Name:</label>
+          <input
+            id='lastName'
+            name='lastName'
+            type='text'
+            autocomplete='family-name'
+            required
+          />
+        </div>
+      </div>
+
+      <div class='form-group'>
+        <label for='email'>Email Address:</label>
+        <input
+          id='email'
+          name='email'
+          type='email'
+          autocomplete='email'
+          required
+        />
+        {errors.email && <p class='error-message'>{errors.email}</p>}
+      </div>
+
+      <div class='form-group'>
+        <label for='password'>Password:</label>
+        <input
+          id='password'
+          name='password'
+          type='password'
+          autocomplete='new-password'
+          required
+        />
+        {errors.password && <p class='error-message'>{errors.password}</p>}
+      </div>
+
+      <div class='form-group'>
+        <label for='confirmPassword'>Confirm Password:</label>
+        <input
+          id='confirmPassword'
+          name='confirmPassword'
+          type='password'
+          autocomplete='new-password'
+          required
+        />
+      </div>
+
+      <button type='submit' class='submit-button'>Register</button>
+    </form>
+
+    <p class='login-link'>
+      Already have an account? <a href='/login'>Login here</a>
+    </p>
+  </div>
+</ContentLayout>

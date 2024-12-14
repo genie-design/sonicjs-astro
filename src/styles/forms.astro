@@ -1,0 +1,82 @@
+<style is:global>
+  .form-section {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: var(--color-primary-light);
+    border-radius: 8px;
+  }
+
+  .form-section h2 {
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    font-weight: bold;
+    color: var(--color-primary);
+  }
+
+  .form-group input {
+    padding: 0.5rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+  .error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  .submit-button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+  }
+
+  .submit-button:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .login-link {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--color-primary);
+  }
+
+  .login-link a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .login-link a:hover {
+    color: var(--color-primary-dark);
+  }
+</style>

@@ -1,4 +1,4 @@
-import { createTransport, type Transporter } from "nodemailer";
+import { createTransport, type Transporter } from 'nodemailer';
 
 type SendEmailOptions = {
   /** Email address of the recipient */
@@ -9,7 +9,9 @@ type SendEmailOptions = {
   html: string;
 };
 
-export async function sendEmail(options: SendEmailOptions): Promise<Transporter> {
+export async function sendEmail(
+  options: SendEmailOptions
+): Promise<Transporter> {
   const transporter = await getEmailTransporter();
   return new Promise(async (resolve, reject) => {
     // Build the email message
@@ -24,7 +26,7 @@ export async function sendEmail(options: SendEmailOptions): Promise<Transporter>
         reject(err);
       }
       // Log the message ID and preview URL if available.
-      console.log("Message sent:", info.messageId);
+      console.log('Message sent:', info.messageId);
       resolve(info);
     });
   });
@@ -33,13 +35,13 @@ export async function sendEmail(options: SendEmailOptions): Promise<Transporter>
 async function getEmailTransporter(): Promise<Transporter> {
   return new Promise((resolve, reject) => {
     if (!import.meta.env.RESEND_API_KEY) {
-      throw new Error("Missing Resend configuration");
+      throw new Error('Missing Resend configuration');
     }
     const transporter = createTransport({
-      host: "smtp.resend.com",
+      host: 'smtp.resend.com',
       secure: true,
       port: 465,
-      auth: { user: "resend", pass: import.meta.env.RESEND_API_KEY },
+      auth: { user: 'resend', pass: import.meta.env.RESEND_API_KEY }
     });
     resolve(transporter);
   });

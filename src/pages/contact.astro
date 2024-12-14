@@ -1,0 +1,159 @@
+---
+import ContentLayout from '@/layouts/ContentLayout.astro';
+---
+
+<ContentLayout title='Contact'>
+  <h1>Contact Us</h1>
+
+  <div class='contact-grid'>
+    <div class='contact-info-card'>
+      <h2>Connect With Us</h2>
+      <p>
+        Have questions about our products or want to place an order? We'd love
+        to hear from you!
+      </p>
+      <div class='social-links'>
+        <a
+          href='https://www.instagram.com/browndogbiscuits/'
+          target='_blank'
+          rel='noopener noreferrer'
+          class='instagram-link'
+        >
+          <img
+            src='/images/instagram.svg'
+            alt='Instagram icon'
+            class='social-icon'
+          />
+          <span>Message us to purchase and follow us on Instagram</span>
+        </a>
+      </div>
+    </div>
+
+    <div class='contact-form-card'>
+      <h2>Send Us a Message</h2>
+      <form class='contact-form' action='#' method='POST'>
+        <div class='form-group'>
+          <label for='name'>Name:</label>
+          <input type='text' id='name' name='name' required='' />
+        </div>
+
+        <div class='form-group'>
+          <label for='email'>Email:</label>
+          <input type='email' id='email' name='email' required='' />
+        </div>
+
+        <div class='form-group'>
+          <label for='subject'>Subject:</label>
+          <select id='subject' name='subject' required=''>
+            <option value=''>Select a subject</option>
+            <option value='order'>Place an Order</option>
+            <option value='question'>Product Question</option>
+            <option value='wholesale'>Wholesale Inquiry</option>
+            <option value='other'>Other</option>
+          </select>
+        </div>
+
+        <div class='form-group'>
+          <label for='message'>Message:</label>
+          <textarea id='message' name='message' rows='5' required=''></textarea>
+        </div>
+
+        <button type='submit' class='cta-button'>Send Message</button>
+      </form>
+    </div>
+  </div>
+</ContentLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-info-card,
+  .contact-form-card {
+    background-color: var(--color-primary-light);
+    border-radius: 0.5rem;
+    padding: 2rem;
+  }
+
+  .contact-info-card h2,
+  .contact-form-card h2 {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .social-links {
+    margin-top: 1.5rem;
+  }
+
+  .instagram-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem;
+    transition: color 0.3s;
+  }
+
+  .instagram-link:hover {
+    color: var(--color-accent);
+  }
+
+  .social-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    color: var(--color-primary);
+    font-weight: bold;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.75rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 0.25rem;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px var(--color-accent-light);
+  }
+
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .content-container {
+      padding: 3rem;
+    }
+  }
+</style>

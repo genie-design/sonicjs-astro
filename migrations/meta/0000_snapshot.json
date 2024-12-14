@@ -93,12 +93,8 @@
           "name": "categoriesToPosts_postId_posts_id_fk",
           "tableFrom": "categoriesToPosts",
           "tableTo": "posts",
-          "columnsFrom": [
-            "postId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["postId"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -106,22 +102,15 @@
           "name": "categoriesToPosts_categoryId_categories_id_fk",
           "tableFrom": "categoriesToPosts",
           "tableTo": "categories",
-          "columnsFrom": [
-            "categoryId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["categoryId"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
         "categoriesToPosts_postId_categoryId_pk": {
-          "columns": [
-            "postId",
-            "categoryId"
-          ],
+          "columns": ["postId", "categoryId"],
           "name": "categoriesToPosts_postId_categoryId_pk"
         }
       },
@@ -183,16 +172,12 @@
       "indexes": {
         "commentsUserIdIndex": {
           "name": "commentsUserIdIndex",
-          "columns": [
-            "userId"
-          ],
+          "columns": ["userId"],
           "isUnique": false
         },
         "commentsPostIdIndex": {
           "name": "commentsPostIdIndex",
-          "columns": [
-            "postId"
-          ],
+          "columns": ["postId"],
           "isUnique": false
         }
       },
@@ -270,9 +255,7 @@
       "indexes": {
         "postUserIdIndex": {
           "name": "postUserIdIndex",
-          "columns": [
-            "userId"
-          ],
+          "columns": ["userId"],
           "isUnique": false
         }
       },
@@ -325,12 +308,8 @@
           "name": "user_keys_user_id_users_id_fk",
           "tableFrom": "user_keys",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -390,12 +369,8 @@
           "name": "user_sessions_user_id_users_id_fk",
           "tableFrom": "user_sessions",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }

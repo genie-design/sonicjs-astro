@@ -1,0 +1,92 @@
+---
+import { Card } from '@/components/Card';
+import { CardContainer } from '@/components/CardContainer';
+import ContentLayout from '../layouts/ContentLayout.astro';
+---
+
+<ContentLayout title='Testimonials'>
+  <h1>Customer Testimonials</h1>
+
+  <div class='featured-image-container'>
+    <img
+      src='/images/browndogbiscuits-20240102_110332-2975647146.jpg'
+      alt='Happy dogs enjoying our treats'
+      class='featured-image'
+    />
+    <p class='image-caption'>
+      What our furry friends and their humans have to say about Brown Dog
+      Biscuits
+    </p>
+  </div>
+
+  <CardContainer className='basic-card-grid'>
+    <Card className='basic-card testimonial-card' title='Corey & Marta'>
+      <div slot='content'>
+        <div class='rating'>★★★★★</div>
+        Maple absolutely loves the peanut butter treats! They are the perfect size
+        for training, and I love knowing they are made with natural ingredients.
+        We are customers for life!
+      </div>
+    </Card>
+    <Card className='basic-card testimonial-card' title='Tom & Bella'>
+      <div slot='content'>
+        <div class='rating'>★★★★★</div>
+        "The variety of flavors keeps things interesting for Charlie. He especially
+        loves the blueberry treats. Thank you for making such high-quality products!"
+      </div>
+    </Card>
+    <Card className='basic-card testimonial-card' title='Maria & Rocky'>
+      <div slot='content'>
+        <div class='rating'>★★★★★</div>
+        "Our pup has never been so excited for treats! These are clearly made with
+        love and care."
+      </div>
+    </Card>
+    <Card className='basic-card testimonial-card' title='David & Luna'>
+      <div slot='content'>
+        <div class='rating'>★★★★★</div>
+        Luna gets so excited when she sees the Brown Dog Biscuits bag. Best treats
+        we have ever found!
+      </div>
+    </Card>
+    <Card className='basic-card testimonial-card' title='Jennifer & Cooper'>
+      <div slot='content'>
+        <div class='rating'>★★★★★</div>
+        Cooper is usually picky with treats, but he absolutely loves these. Great
+        quality!
+      </div>
+    </Card>
+    <Card className='basic-card testimonial-card' title='Mike & Bailey'>
+      <div slot='content'>
+        <div class='rating'>★★★★★</div>
+        "We love supporting local businesses, especially when they make such amazing
+        products!"
+      </div>
+    </Card>
+    <Card className='basic-card testimonial-card' title='Lisa & Charlie'>
+      <div slot='content'>
+        <div class='rating'>★★★★★</div>
+        "These treats are perfect! Charlie sits by the treat jar waiting for his
+        daily Brown Dog Biscuit."
+      </div>
+    </Card>
+    <Card className='basic-card testimonial-card' title='Amanda & Zeus'>
+      <div slot='content'>
+        <div class='rating'>★★★★★</div>
+        "Zeus gives these treats two paws up! We love the all-natural ingredients."
+      </div>
+    </Card>
+  </CardContainer>
+
+  <div class='cta-container'>
+    <p>Would you like to share your experience?</p>
+    <a href='/contact.html' class='cta-button'>Contact Us</a>
+  </div>
+</ContentLayout>
+
+<style>
+  .rating {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+</style>

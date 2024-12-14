@@ -93,12 +93,8 @@
           "name": "categoriesToPosts_postId_posts_id_fk",
           "tableFrom": "categoriesToPosts",
           "tableTo": "posts",
-          "columnsFrom": [
-            "postId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["postId"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -106,22 +102,15 @@
           "name": "categoriesToPosts_categoryId_categories_id_fk",
           "tableFrom": "categoriesToPosts",
           "tableTo": "categories",
-          "columnsFrom": [
-            "categoryId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["categoryId"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
         "categoriesToPosts_postId_categoryId_pk": {
-          "columns": [
-            "postId",
-            "categoryId"
-          ],
+          "columns": ["postId", "categoryId"],
           "name": "categoriesToPosts_postId_categoryId_pk"
         }
       },
@@ -183,16 +172,12 @@
       "indexes": {
         "commentsUserIdIndex": {
           "name": "commentsUserIdIndex",
-          "columns": [
-            "userId"
-          ],
+          "columns": ["userId"],
           "isUnique": false
         },
         "commentsPostIdIndex": {
           "name": "commentsPostIdIndex",
-          "columns": [
-            "postId"
-          ],
+          "columns": ["postId"],
           "isUnique": false
         }
       },
@@ -270,9 +255,7 @@
       "indexes": {
         "postUserIdIndex": {
           "name": "postUserIdIndex",
-          "columns": [
-            "userId"
-          ],
+          "columns": ["userId"],
           "isUnique": false
         }
       },
@@ -367,22 +350,15 @@
           "name": "account_userId_user_id_fk",
           "tableFrom": "account",
           "tableTo": "user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
         "account_provider_providerAccountId_pk": {
-          "columns": [
-            "provider",
-            "providerAccountId"
-          ],
+          "columns": ["provider", "providerAccountId"],
           "name": "account_provider_providerAccountId_pk"
         }
       },
@@ -451,9 +427,7 @@
       "indexes": {
         "authenticator_credentialID_unique": {
           "name": "authenticator_credentialID_unique",
-          "columns": [
-            "credentialID"
-          ],
+          "columns": ["credentialID"],
           "isUnique": true
         }
       },
@@ -462,22 +436,15 @@
           "name": "authenticator_userId_user_id_fk",
           "tableFrom": "authenticator",
           "tableTo": "user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
         "authenticator_userId_credentialID_pk": {
-          "columns": [
-            "userId",
-            "credentialID"
-          ],
+          "columns": ["userId", "credentialID"],
           "name": "authenticator_userId_credentialID_pk"
         }
       },
@@ -514,12 +481,8 @@
           "name": "session_userId_user_id_fk",
           "tableFrom": "session",
           "tableTo": "user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -569,9 +532,7 @@
       "indexes": {
         "user_email_unique": {
           "name": "user_email_unique",
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "isUnique": true
         }
       },
@@ -608,10 +569,7 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {
         "verificationToken_identifier_token_pk": {
-          "columns": [
-            "identifier",
-            "token"
-          ],
+          "columns": ["identifier", "token"],
           "name": "verificationToken_identifier_token_pk"
         }
       },

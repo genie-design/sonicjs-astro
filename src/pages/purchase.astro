@@ -1,0 +1,259 @@
+---
+import { Card } from '@/components/Card';
+import { CardContainer } from '@/components/CardContainer';
+import ContentLayout from '../layouts/ContentLayout.astro';
+
+const products = [
+  {
+    name: 'Peanut Butter Dog Treats',
+    slug: 'peanut-butter',
+    sizes: [
+      { size: 'Small Bag', weight: '4 oz', price: 6.0 },
+      { size: 'Large Bag', weight: '8 oz', price: 10.0 },
+      { size: 'Jumbo Bag', weight: '16 oz', price: 18.0 }
+    ]
+  },
+  {
+    name: 'Apple Carrot Dog Treats',
+    slug: 'apple-carrot',
+    sizes: [
+      { size: 'Small Bag', weight: '4 oz', price: 6.0 },
+      { size: 'Large Bag', weight: '8 oz', price: 10.0 },
+      { size: 'Jumbo Bag', weight: '16 oz', price: 18.0 }
+    ]
+  },
+  {
+    name: 'Peanut Butter Blueberry Dog Treats',
+    slug: 'peanut-butter-blueberry',
+    sizes: [
+      { size: 'Small Bag', weight: '4 oz', price: 6.0 },
+      { size: 'Large Bag', weight: '8 oz', price: 10.0 },
+      { size: 'Jumbo Bag', weight: '16 oz', price: 18.0 }
+    ]
+  },
+  {
+    name: 'Pumpkin Dog Treats',
+    slug: 'pumpkin',
+    sizes: [
+      { size: 'Small Bag', weight: '4 oz', price: 6.0 },
+      { size: 'Large Bag', weight: '8 oz', price: 10.0 },
+      { size: 'Jumbo Bag', weight: '16 oz', price: 18.0 }
+    ]
+  }
+];
+
+const treatSizes = ['Petite', 'Small', 'Regular'];
+---
+
+<ContentLayout title='Purchase'>
+  <div class='order-section'>
+    <h2>Order Form</h2>
+    <form class='order-form' action='/api/submit-order' method='POST'>
+      <div class='form-group'>
+        <label for='flavor'>Select Flavor:</label>
+        <select name='flavor' id='flavor' required>
+          <option value=''>Choose a flavor...</option>
+          {
+            products.map((product) => (
+              <option value={product.slug}>{product.name}</option>
+            ))
+          }
+        </select>
+      </div>
+
+      <div class='form-group'>
+        <label for='treatSize'>Treat Size:</label>
+        <select name='treatSize' id='treatSize' required>
+          <option value=''>Choose treat size...</option>
+          {
+            treatSizes.map((size) => (
+              <option value={size.toLowerCase()}>{size}</option>
+            ))
+          }
+        </select>
+      </div>
+
+      <div class='form-group'>
+        <label for='bagSize'>Bag Size:</label>
+        <select name='bagSize' id='bagSize' required>
+          <option value=''>Choose bag size...</option>
+          {
+            products[0].sizes.map((size) => (
+              <option value={size.size}>
+                {size.size} ({size.weight}) - ${size.price.toFixed(2)}
+              </option>
+            ))
+          }
+        </select>
+      </div>
+
+      <div class='form-group'>
+        <label for='quantity'>Quantity:</label>
+        <input
+          type='number'
+          name='quantity'
+          id='quantity'
+          min='1'
+          value='1'
+          required
+        />
+      </div>
+
+      <button type='submit' class='submit-button'>Place Order</button>
+    </form>
+  </div>
+
+  <h1>Find Us at Local Markets</h1>
+  <CardContainer className='basic-card-grid basic-card-grid-3'>
+    <Card
+      className='basic-card'
+      imageUrl='/images/browndogbiscuits-logan-street-market.jpg'
+      imageAlt='Brown Dog Biscuits at Logan Street Market'
+      title='Logan Street Market'
+      content="Visit us at our regular spot in Louisville's vibrant Logan Street Market!"
+    />
+    <Card
+      className='basic-card'
+      imageUrl='/images/browndogbiscuits-Simpsonvillefarmersmarket.jpg'
+      imageAlt='Brown Dog Biscuits at Simpsonville Farmers Market'
+      title='Simpsonville Farmers Market'
+      content='Find us at the Simpsonville Farmers Market during market season!'
+    />
+    <Card
+      className='basic-card'
+      imageUrl='/images/browndogbiscuits-20240601_072554-2608879330.jpg'
+      imageAlt='Brown Dog Biscuits Display'
+      title='Special Events'
+      content='We attend various special events throughout the year!'
+    />
+  </CardContainer>
+
+  <div class='schedule-container'>
+    <h2>Upcoming Market Dates</h2>
+    <table class='market-schedule'>
+      <thead>
+        <tr>
+          <th>Market</th>
+          <th>Date</th>
+          <th>Hours</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Logan Street Market</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Simpsonville Farmers Market</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Holiday Market</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <CardContainer className='basic-card-grid'>
+    <Card
+      className='basic-card contact-card'
+      title="Can't Make It to the Markets?"
+      content='Contact us directly to place an order for pickup or delivery!'
+      ctaText='Contact Us'
+      ctaHref='/contact.html'
+    />
+  </CardContainer>
+</ContentLayout>
+
+<style>
+  .schedule-container {
+    margin-bottom: 3rem;
+  }
+
+  .schedule-container h2 {
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .market-schedule {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: var(--color-primary-light);
+  }
+
+  .market-schedule th,
+  .market-schedule td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid var(--color-primary);
+  }
+
+  .market-schedule th {
+    background-color: var(--color-primary);
+    color: var(--color-primary-light);
+  }
+
+  .market-schedule tr:nth-child(even) {
+    background-color: rgba(154, 81, 36, 0.1);
+  }
+
+  .order-section {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: var(--color-primary-light);
+    border-radius: 8px;
+  }
+
+  .order-section h2 {
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .order-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    font-weight: bold;
+    color: var(--color-primary);
+  }
+
+  .form-group select,
+  .form-group input {
+    padding: 0.5rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+  .submit-button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .submit-button:hover {
+    background-color: var(--color-primary-dark);
+  }
+</style>

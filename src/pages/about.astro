@@ -1,0 +1,42 @@
+---
+import { Card } from '@/components/Card';
+import { CardContainer } from '@/components/CardContainer';
+import ContentLayout from '../layouts/ContentLayout.astro';
+import { StorySection } from '@/components/StorySection';
+---
+
+<ContentLayout title='About'>
+  <h1>Our Story</h1>
+
+  <StorySection
+    title='Four-Legged Friends'
+    descriptions={[
+      'Welcome to Brown Dog Biscuits, where every treat is handcrafted with love and care in small batches. As a female small business owner and passionate dog lover, I started this journey with a simple mission: to create premium, wholesome treats that dogs love and owners can trust.',
+      'What began as homemade treats for my own furry family members has grown into a labor of love, serving dog owners who want the very best for their four-legged friends.'
+    ]}
+    imageSrc='/images/browndogbiscuits-logan-street-market.jpg'
+    imageAlt='Brown Dog Biscuits owner at Logan Street Market'
+    imageCaption='Meeting our wonderful customers at Logan Street Market'
+  >
+    <div slot='story-section'>
+      <h2>Our Quality Promise</h2>
+      <CardContainer className='basic-card-grid basic-card-grid-3'>
+        <Card
+          className='basic-card'
+          title='All-Natural Ingredients'
+          content='We use only human-grade, natural ingredients. No preservatives, no artificial colors, just pure goodness your dog can taste.'
+        />
+        <Card
+          className='basic-card'
+          title='Handmade in Small Batches'
+          content='Each treat is carefully made by hand in small batches to ensure the highest quality and freshness.'
+        />
+        <Card
+          className='basic-card'
+          title='Locally Available'
+          content='Find us at local farmers markets where we personally connect with our customers and their furry friends.'
+        />
+      </CardContainer>
+    </div>
+  </StorySection>
+</ContentLayout>

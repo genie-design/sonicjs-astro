@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { CardContainer } from '../components/CardContainer';
+import { Card } from '@/components/Card';
 ---
 
 <BaseLayout title='Home'>
@@ -12,7 +14,43 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           class='main-logo'
         />
       </div>
-      <!-- Rest of the home page content -->
+      <div class='home-content'>
+        <CardContainer>
+          <Card
+            className='featured-card'
+            title='Our Story'
+            content='Brown Dog Biscuits is a family-owned business that specializes in making delicious, handcrafted biscuits for your furry friends.'
+            ctaText='Learn More'
+            ctaHref='/about'
+            imageUrl='images/browndogbiscuits-logan-street-market.jpg'
+            imageAlt='Brown Dog Biscuits at Logan Street Market'
+          />
+          <Card
+            className='featured-card'
+            title='Delicious Variety'
+            content='Tested by our girls to be impawsible to resist. Great treats for all size dogs and uses, whether it be for training or a special treat.'
+            ctaText='See our products'
+            ctaHref='/products'
+            imageUrl='/images/treats.jpg'
+            imageAlt='Delicious Variety'
+          />
+          <Card
+            className='featured-card'
+            title='Purchase'
+            content='Visit us at a local market or have them shipped to your home!'
+            ctaText='Where to Purchase'
+            ctaHref='/purchase'
+            imageUrl='/images/browndogbiscuits-20240601_072554-2608879330.jpg'
+            imageAlt='Purchase Options'
+          />
+        </CardContainer>
+        <!-- Rest of the home page content -->
+      </div>
     </div>
   </div>
 </BaseLayout>
+<style>
+  .home-content {
+    padding: 2rem 1rem;
+  }
+</style>

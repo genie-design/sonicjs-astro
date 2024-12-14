@@ -1,0 +1,76 @@
+---
+import { Card } from '@/components/Card';
+import { CardContainer } from '@/components/CardContainer';
+import ContentLayout from '../layouts/ContentLayout.astro';
+---
+
+<ContentLayout title='Dog Training Tips & Stories'>
+  <h1>Dog Training Tips & Stories</h1>
+
+  <div class='featured-image-container'>
+    <img
+      src='/images/treats.jpg'
+      alt='Dog training with treats'
+      class='featured-image'
+    />
+    <p class='image-caption'>
+      Effective training starts with the right rewards
+    </p>
+  </div>
+
+  <CardContainer className='blog-grid'>
+    <Card
+      className='blog-card'
+      title='Why Natural Treats Matter'
+      imageUrl='/images/browndogbiscuits-20231118_204057-3299668957.jpg'
+      imageAlt='Making treats in the kitchen'
+      content="As a dog owner and treat maker, I've learned the importance of using natural ingredients. Here's why what goes into your dog's treats matters..."
+      ctaText='Read More'
+      ctaHref='#'
+    />
+
+    <Card
+      className='blog-card'
+      title='Training Tips: Size Matters'
+      imageUrl='/images/browndogbiscuits-20240825_185809-1922816353.jpg'
+      imageAlt='Training treats preparation'
+      content='Discover why treat size is crucial for effective training sessions and how our training-sized treats can help...'
+      ctaText='Read More'
+      ctaHref='#'
+    />
+
+    <Card
+      className='blog-card'
+      title="Market Tales: Cooper's Story"
+      imageUrl='/images/browndogbiscuits-Simpsonvillefarmersmarket.jpg'
+      imageAlt='Meeting customers at the market'
+      content='Meet Cooper, a dog with special dietary needs who found his perfect treats at our market stand...'
+      ctaText='Read More'
+      ctaHref='#'
+    />
+  </CardContainer>
+
+  <CardContainer className='basic-card-grid basic-card-grid-2'>
+    <Card className='basic-card' title='Quick Training Tips'>
+      <div slot='content'>
+        <ul class='flavor-features'>
+          <li>Keep training sessions short (5-10 minutes)</li>
+          <li>Use small, easily consumed treats</li>
+          <li>Practice in different locations</li>
+          <li>Stay consistent with commands</li>
+        </ul>
+      </div>
+    </Card>
+
+    <Card className='basic-card' title='Treat Storage Tips'>
+      <div slot='content'>
+        <ul class='flavor-features'>
+          <li>Store in an airtight container</li>
+          <li>Keep in a cool, dry place</li>
+          <li>Check expiration dates</li>
+          <li>Freeze for longer storage</li>
+        </ul>
+      </div>
+    </Card>
+  </CardContainer>
+</ContentLayout>

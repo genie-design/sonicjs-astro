@@ -1,0 +1,232 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { StorySection } from '@/components/StorySection';
+import { Card } from '@/components/Card';
+import { CardContainer } from '@/components/CardContainer';
+import type { Product } from '@/types/Product';
+
+const products: Product[] = [
+  {
+    name: 'Peanut Butter Dog Treats',
+    slug: 'peanut-butter',
+    description:
+      'Our classic peanut butter treats are made with all-natural peanut butter and wholesome ingredients. These treats are perfect for all dog sizes and are a favorite among our four-legged customers!',
+    features: [
+      'Made with natural peanut butter',
+      'No artificial preservatives',
+      'Available in training and regular sizes',
+      'Freshly baked in small batches'
+    ],
+    sizes: [
+      { size: 'Small Bag', weight: '4 oz', price: 6.0 },
+      { size: 'Large Bag', weight: '8 oz', price: 10.0 },
+      { size: 'Jumbo Bag', weight: '16 oz', price: 18.0 }
+    ],
+    imageSrc: '/images/browndogbiscuits-20231105_124453-1194181709.jpg',
+    imageAlt: 'Fresh baked peanut butter dog treats',
+    imageCaption: 'Freshly baked peanut butter treats your dog will love'
+  },
+  {
+    name: 'Apple Carrot Dog Treats',
+    slug: 'apple-carrot',
+    description:
+      'Our apple carrot treats are made with fresh apples and carrots, providing a healthy and delicious snack for your dog. These treats are perfect for all dog sizes and are a favorite among our four-legged customers!',
+    features: [
+      'Made with fresh apples and carrots',
+      'No artificial preservatives',
+      'Available in training and regular sizes',
+      'Freshly baked in small batches'
+    ],
+    sizes: [
+      { size: 'Small Bag', weight: '4 oz', price: 6.0 },
+      { size: 'Large Bag', weight: '8 oz', price: 10.0 },
+      { size: 'Jumbo Bag', weight: '16 oz', price: 18.0 }
+    ],
+    imageSrc: '/images/browndogbiscuits-20231105_124453-1194181709.jpg',
+    imageAlt: 'Fresh baked apple carrot dog treats',
+    imageCaption: 'Freshly baked apple carrot treats your dog will love'
+  },
+  {
+    name: 'Peanut Butter Blueberry Dog Treats',
+    slug: 'peanut-butter-blueberry',
+    description:
+      'Our peanut butter blueberry treats are made with all-natural peanut butter and fresh blueberries, providing a tasty and nutritious snack for your dog. These treats are perfect for all dog sizes and are a favorite among our four-legged customers!',
+    features: [
+      'Made with natural peanut butter and fresh blueberries',
+      'No artificial preservatives',
+      'Available in training and regular sizes',
+      'Freshly baked in small batches'
+    ],
+    sizes: [
+      { size: 'Small Bag', weight: '4 oz', price: 6.0 },
+      { size: 'Large Bag', weight: '8 oz', price: 10.0 },
+      { size: 'Jumbo Bag', weight: '16 oz', price: 18.0 }
+    ],
+    imageSrc: '/images/browndogbiscuits-20231105_124453-1194181709.jpg',
+    imageAlt: 'Fresh baked peanut butter blueberry dog treats',
+    imageCaption:
+      'Freshly baked peanut butter blueberry treats your dog will love'
+  },
+  {
+    name: 'Pumpkin Dog Treats',
+    slug: 'pumpkin',
+    description:
+      'Our pumpkin treats are made with fresh pumpkin, providing a healthy and delicious snack for your dog. These treats are perfect for all dog sizes and are a favorite among our four-legged customers!',
+    features: [
+      'Made with fresh pumpkin',
+      'No artificial preservatives',
+      'Available in training and regular sizes',
+      'Freshly baked in small batches'
+    ],
+    sizes: [
+      { size: 'Small Bag', weight: '4 oz', price: 6.0 },
+      { size: 'Large Bag', weight: '8 oz', price: 10.0 },
+      { size: 'Jumbo Bag', weight: '16 oz', price: 18.0 }
+    ],
+    imageSrc: '/images/browndogbiscuits-20231105_124453-1194181709.jpg',
+    imageAlt: 'Fresh baked pumpkin dog treats',
+    imageCaption: 'Freshly baked pumpkin treats your dog will love'
+  }
+];
+
+const { product } = Astro.params;
+const productData = products.find((p) => p.slug === product);
+
+if (!productData) {
+  return Astro.redirect('/404');
+}
+---
+
+<ContentLayout title={productData.name}>
+  <h1>{productData.name}</h1>
+
+  <StorySection
+    title='Product Details'
+    descriptions={[productData.description]}
+    imageSrc={productData.imageSrc}
+    imageAlt={productData.imageAlt}
+    imageCaption={productData.imageCaption}
+    flipImage={true}
+  >
+    <div slot='content-children' class='product-features'>
+      <div>
+        <h3>Features</h3>
+        <ul>
+          {productData.features.map((feature) => <li>{feature}</li>)}
+        </ul>
+      </div>
+
+      <Card className='basic-card' title='Available Sizes & Prices'>
+        <ul slot='content'>
+          {
+            productData.sizes.map((size) => (
+              <li>
+                {size.size} ({size.weight}) - ${size.price.toFixed(2)}
+              </li>
+            ))
+          }
+        </ul>
+      </Card>
+
+      <div class='purchase-section'>
+        <h3>Ready to Order?</h3>
+        <p>Visit us at local markets or contact us for delivery options</p>
+        <a href='/purchase' class='cta-button'>Where to Purchase</a>
+      </div>
+    </div>
+
+    <div slot='story-section'>
+      <CardContainer className='basic-card-grid basic-card-grid-3'>
+        <Card
+          className='basic-card'
+          title='All Natural'
+          content='Made with human-grade ingredients you can trust'
+        />
+        <Card
+          className='basic-card'
+          title='Freshly Baked'
+          content='Baked in small batches for maximum freshness'
+        />
+        <Card
+          className='basic-card'
+          title='Dog Approved'
+          content='Tested and loved by our four-legged friends'
+        />
+      </CardContainer>
+      <CardContainer className='basic-card-grid basic-card-grid-3'>
+        <Card
+          className='basic-card'
+          title='Petite'
+          imageUrl='/images/products/petite_shapes.webp'
+          imageAlt='Petite Shapes'
+        />
+        <Card
+          className='basic-card'
+          title='Small'
+          imageUrl='/images/products/small_shapes.webp'
+          imageAlt='Small Shapes'
+        />
+        <Card
+          className='basic-card'
+          title='Regular'
+          imageUrl='/images/products/regular_heart.webp'
+          imageAlt='Regular Heart'
+        />
+      </CardContainer>
+      <img
+        src='/images/products/nutrition.webp'
+        alt='nutrition'
+        class='nutrition-image'
+      />
+    </div>
+  </StorySection>
+</ContentLayout>
+
+<style>
+  .nutrition-image {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .product-features {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .flavor-content {
+    padding: 2rem;
+  }
+
+  .flavor-details {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .flavor-description {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .flavor-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .flavor-features li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-primary);
+  }
+
+  .flavor-features li:last-child {
+    border-bottom: none;
+  }
+
+  @media (min-width: 1024px) {
+    .content-container {
+      padding: 3rem;
+    }
+  }
+</style>

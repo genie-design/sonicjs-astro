@@ -6,13 +6,26 @@ const Header: FC = () => {
   const [currentPath, setCurrentPath] = useState('/');
 
   useEffect(() => {
+    console.log('bam:', window.location.pathname);
     setCurrentPath(window.location.pathname);
   }, []);
 
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/about', label: 'Our Story' },
-    { path: '/products', label: 'Products' },
+    {
+      path: '/products',
+      label: 'Products',
+      subLinks: [
+        { path: '/products/peanut-butter', label: 'Peanut Butter' },
+        { path: '/products/apple-carrot', label: 'Apple Carrot' },
+        {
+          path: '/products/peanut-butter-blueberry',
+          label: 'Peanut Butter Blueberry'
+        },
+        { path: '/products/pumpkin', label: 'Pumpkin' }
+      ]
+    },
     { path: '/purchase', label: 'Purchase' },
     { path: '/testimonials', label: 'Testimonials' },
     { path: '/made', label: "How They're Made" },
@@ -41,14 +54,32 @@ const Header: FC = () => {
         <div className='nav-end'></div>
       </div>
       <nav className='main-nav'>
-        {navLinks.map(({ path, label }) => (
-          <a
-            key={path}
-            href={path}
-            className={`nav-link ${currentPath === path ? 'nav-link-active' : ''}`}
-          >
-            {label}
-          </a>
+        {navLinks.map(({ path, label, subLinks }) => (
+          <div key={path} className='nav-item'>
+            <a
+              href={path}
+              className={`nav-link ${
+                (
+                  path === '/' ?
+                    !currentPath || currentPath === path
+                  : currentPath.startsWith(path)
+                ) ?
+                  'nav-link-active'
+                : ''
+              }`}
+            >
+              {label} {subLinks && <span>&#9662;</span>}
+            </a>
+            {subLinks && (
+              <div className='dropdown'>
+                {subLinks.map(({ path: subPath, label: subLabel }) => (
+                  <a key={subPath} href={subPath} className='dropdown-link'>
+                    {subLabel}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
         ))}
       </nav>
     </header>

@@ -1,0 +1,85 @@
+---
+import { Card } from '@/components/Card';
+import { CardContainer } from '@/components/CardContainer';
+import ContentLayout from '../layouts/ContentLayout.astro';
+---
+
+<ContentLayout title='FAQ'>
+  <h1>Frequently Asked Questions</h1>
+
+  <CardContainer className='basic-card-grid'>
+    <Card className='basic-card' title='How long do the treats last?'>
+      <div slot='content'>
+        Our treats are best consumed within 6 months when stored in an airtight
+        container at room temperature. For maximum freshness, you can store them
+        in the refrigerator.
+      </div>
+    </Card>
+
+    <Card className='basic-card' title='Are your treats safe for puppies?'>
+      <div slot='content'>
+        Yes! Our treats are made with natural ingredients and are safe for
+        puppies over 12 weeks old. For training, we recommend our smaller
+        training-sized treats.
+      </div>
+    </Card>
+
+    <Card className='basic-card' title='What ingredients do you use?'>
+      <div slot='content'>
+        We use only human-grade, natural ingredients like fresh fruits,
+        vegetables, and pure peanut butter. No preservatives, artificial colors,
+        or flavors are ever used.
+      </div>
+    </Card>
+
+    <Card className='basic-card' title='Where can I buy your treats?'>
+      <div slot='content'>
+        Our treats are available at local farmers markets and can be ordered
+        directly. Visit our Purchase page for locations and ordering
+        information.
+      </div>
+    </Card>
+
+    <Card className='basic-card' title='Do you offer custom orders?'>
+      <div slot='content'>
+        Yes! We can accommodate custom orders for special occasions or dietary
+        needs. Please contact us directly to discuss your requirements.
+      </div>
+    </Card>
+
+    <Card className='basic-card' title='What size treats should I choose?'>
+      <div slot='content'>
+        We offer training size treats perfect for small dogs and training
+        sessions, and regular size treats suitable for everyday rewards for all
+        dog sizes.
+      </div>
+    </Card>
+
+    <Card className='basic-card' title='Do you ship your treats?'>
+      <div slot='content'>
+        Yes, we offer shipping within the local area. Please contact us for
+        shipping rates and availability in your area.
+      </div>
+    </Card>
+
+    <Card className='basic-card' title='How many treats per day?'>
+      <div slot='content'>
+        Treats should make up no more than 10% of your dog's daily caloric
+        intake. The appropriate number varies based on your dog's size and
+        activity level.
+      </div>
+    </Card>
+  </CardContainer>
+
+  <div class='cta-container'>
+    <p>Still have questions? We're here to help!</p>
+    <a href='/contact.html' class='cta-button'>Contact Us</a>
+  </div>
+</ContentLayout>
+
+<style>
+  .cta-container {
+    text-align: center;
+    margin-top: 3rem;
+  }
+</style>

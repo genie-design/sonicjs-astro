@@ -1,0 +1,99 @@
+---
+import { Card } from '@/components/Card';
+import { CardContainer } from '@/components/CardContainer';
+import ContentLayout from '../layouts/ContentLayout.astro';
+import { StorySection } from '@/components/StorySection';
+---
+
+<ContentLayout title='About'>
+  <h1>Our Treats</h1>
+
+  <div class='featured-image-container'>
+    <img
+      src='/images/browndogbiscuits-20231113_185104-524141987.jpg'
+      alt='Variety of Brown Dog Biscuits treats'
+      class='featured-image'
+    />
+    <p class='image-caption'>
+      Our delicious homemade treats in various flavors and sizes
+    </p>
+  </div>
+
+  <div class='product-intro'>
+    <h2>Treat Sizes</h2>
+    <CardContainer className='basic-card-grid basic-card-grid-3'>
+      <Card
+        className='basic-card'
+        title='Petite Biscuits'
+        content='Perfect for training sessions and small rewards. Ideal for all dogs, especially puppies and small breeds.'
+      />
+      <Card
+        className='basic-card'
+        title='Small Biscuits'
+        content='Perfect treat for smaller breeds.'
+      />
+      <Card
+        className='basic-card'
+        title='Regular Biscuits'
+        content='Our classic size biscuits, perfect for everyday treats and rewards. Great for all dog sizes.'
+      />
+    </CardContainer>
+  </div>
+
+  <div class='quantity-options'>
+    <h2>Available Quantities</h2>
+    <CardContainer className='basic-card-grid basic-card-grid-3'>
+      <Card
+        className='basic-card'
+        imageUrl='/images/products/1oz_snack_bones_cropped.webp'
+        imageAlt='1 Ounce Snack Bones'
+        title='1 Ounce Snack'
+        content='Perfect for trying new flavors'
+      />
+      <Card
+        className='basic-card'
+        imageUrl='/images/products/3oz_small.webp'
+        imageAlt='3 Ounce Snack Bones'
+        title='3 Ounce'
+        content='Our most popular size'
+      />
+      <Card
+        className='basic-card'
+        imageUrl='/images/products/6oz_regular_cropped.webp'
+        imageAlt='6 Ounce Regular'
+        title='6 Ounce'
+        content='Best value for treat lovers'
+      />
+    </CardContainer>
+  </div>
+
+  <div class='flavors-section'>
+    <h2>Our Flavors</h2>
+    <CardContainer className='basic-card-grid basic-card-grid-4'>
+      <Card
+        className='basic-card'
+        title='Apple Carrot'
+        ctaText='Details'
+        ctaHref='/products/apple-carrot'
+      />
+      <Card
+        className='basic-card'
+        title='Peanut Butter Blueberry'
+        ctaText='Details'
+        ctaHref='/products/peanut-butter-blueberry'
+      />
+      <Card
+        className='basic-card'
+        title='Pumpkin'
+        ctaText='Details'
+        ctaHref='/products/pumpkin'
+      />
+      <Card
+        className='basic-card'
+        title='Peanut Butter'
+        ctaText='Details'
+        ctaHref='/products/peanut-butter'
+      />
+    </CardContainer>
+  </div>
+</ContentLayout>

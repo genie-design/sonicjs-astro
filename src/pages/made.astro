@@ -1,0 +1,48 @@
+---
+import { Card } from '@/components/Card';
+import { CardContainer } from '@/components/CardContainer';
+import ContentLayout from '../layouts/ContentLayout.astro';
+import { StorySection } from '@/components/StorySection';
+---
+
+<ContentLayout title='Made with Care'>
+  <h1>Made with Care</h1>
+
+  <StorySection
+    title='Crafted with Love'
+    descriptions={[
+      'Every batch of Brown Dog Biscuits is crafted by hand in my kitchen, using carefully selected ingredients. The process of making these treats is a labor of love, ensuring that each biscuit meets our high standards of quality.',
+      'From mixing the perfect blend of wholesome ingredients to carefully baking each batch, every step is performed with the same care and attention I give to treats made for my own dogs.'
+    ]}
+    imageSrc='/images/browndogbiscuits-20231118_204057-3299668957.jpg'
+    imageAlt='Handmaking dog treats'
+    imageCaption='Each treat is handmade with attention to detail'
+  >
+    <div slot='content-children'>
+      <img
+        src='/images/browndogbiscuits-20240825_185809-1922816353.jpg'
+        alt='Handmaking dog treats'
+      />
+    </div>
+    <div slot='story-section'>
+      <h2>Our Values</h2>
+      <CardContainer className='basic-card-grid basic-card-grid-3'>
+        <Card
+          className='basic-card'
+          title='Quality First'
+          content='Every ingredient is carefully selected to ensure your dogs get the very best.'
+        />
+        <Card
+          className='basic-card'
+          title='Personal Touch'
+          content='As a small business, we take pride in personally crafting each batch of treats.'
+        />
+        <Card
+          className='basic-card'
+          title='Guaranteed'
+          content='We offer a 100% satisfaction guarantee on our products.'
+        />
+      </CardContainer>
+    </div>
+  </StorySection>
+</ContentLayout>

@@ -2,7 +2,7 @@
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 
-const Header: FC<{ user?: string }> = ({ user }) => {
+const Header: FC<{ user?: null | string }> = ({ user }) => {
   const [currentPath, setCurrentPath] = useState('/');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 

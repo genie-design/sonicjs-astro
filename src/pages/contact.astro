@@ -2,7 +2,7 @@
 import ContentLayout from '@/layouts/ContentLayout.astro';
 import '@/styles/forms.astro';
 import { table as userComments } from '@/db/schema/user-comments';
-import { nanoid } from 'nanoid';
+import { generateRandomString } from '@/auth/utils/nanoid';
 
 const db = Astro.locals.auth.config.db;
 
@@ -30,7 +30,7 @@ if (Astro.request.method === 'POST') {
       formError = 'Please fill out all fields correctly.';
     } else {
       await db.insert(userComments).values({
-        id: nanoid(),
+        id: generateRandomString(21),
         name,
         email,
         subject,

@@ -3,8 +3,7 @@ import { Card } from '@/components/Card';
 import { CardContainer } from '@/components/CardContainer';
 import ContentLayout from '../layouts/ContentLayout.astro';
 import { table as orders } from '@/db/schema/orders';
-import { nanoid } from 'nanoid';
-
+import { generateRandomString } from '@/auth/utils/nanoid';
 import '../styles/forms.astro';
 
 const products = [
@@ -73,7 +72,7 @@ if (Astro.request.method === 'POST') {
     } else {
       const db = Astro.locals.auth.config.db;
       await db.insert(orders).values({
-        id: nanoid(),
+        id: generateRandomString(21),
         flavor,
         size: treatSize,
         bagSize,

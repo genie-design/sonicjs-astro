@@ -10,7 +10,7 @@ type KVNamespace = import('@cloudflare/workers-types').KVNamespace;
 type ENV = {
   // replace `MY_KV` with your KV namespace
   //   MY_KV: KVNamespace;
-  D1: D1Namespace;
+  DB: D1Namespace;
 };
 
 declare namespace App {

@@ -164,7 +164,7 @@ export async function getRecords(
       message: 'getRecords getD1DataByTable start'
     });
     d1Data = await getD1DataByTable(
-      context.locals.runtime.env.D1,
+      context.locals.runtime.env.DB,
       table,
       params
     );

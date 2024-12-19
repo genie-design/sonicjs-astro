@@ -38,7 +38,7 @@ export const GET: APIRoute = async (context) => {
   }
 
   const { env } = context.locals.runtime;
-  // const db = drizzle(env.D1);
+  // const db = drizzle(env.DB);
 
   const request = context.request;
 
@@ -48,7 +48,7 @@ export const GET: APIRoute = async (context) => {
 
   console.log('queryParams', queryParams);
 
-  // let data = await getD1DataByTable(env.D1, tableName, queryParams);
+  // let data = await getD1DataByTable(env.DB, tableName, queryParams);
 
   if (entry.hooks?.beforeOperation) {
     await entry.hooks.beforeOperation(context, 'read', params.id);
@@ -79,7 +79,7 @@ export const GET: APIRoute = async (context) => {
   try {
     params.limit = params.limit ?? '100';
 
-    // let data = await getD1DataByTable(env.D1, tableName, queryParams);
+    // let data = await getD1DataByTable(env.DB, tableName, queryParams);
     let data = await getRecords(
       context,
       entry.table,
@@ -152,7 +152,7 @@ export const POST: APIRoute = async (context) => {
     );
   }
 
-  // const db = drizzle(env.D1);
+  // const db = drizzle(env.DB);
 
   const request = context.request;
 
@@ -189,7 +189,7 @@ export const POST: APIRoute = async (context) => {
       );
     }
     console.log('posting new record content filtered?', content.data);
-    const result = await insertRecord(env.D1, {}, content);
+    const result = await insertRecord(env.DB, {}, content);
     console.log('create result', result);
 
     if (entry?.hooks?.afterOperation) {
@@ -267,7 +267,7 @@ export const DELETE: APIRoute = async (context) => {
 
   if (record) {
     console.log('content found, deleting...');
-    const result = await deleteRecord(context.locals.runtime.env.D1, {
+    const result = await deleteRecord(context.locals.runtime.env.DB, {
       id,
       table: tableName
     });

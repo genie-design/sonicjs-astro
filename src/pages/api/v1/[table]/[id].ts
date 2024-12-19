@@ -182,7 +182,7 @@ export const PUT: APIRoute = async (context) => {
       // );
     }
     const result = await updateRecord(
-      context.locals.runtime.env.D1,
+      context.locals.runtime.env.DB,
       {},
       content,
       params
@@ -202,7 +202,6 @@ export const PUT: APIRoute = async (context) => {
     return return500(error);
   }
 
-  return return200();
 };
 
 export const DELETE: APIRoute = async (context) => {
@@ -268,7 +267,7 @@ export const DELETE: APIRoute = async (context) => {
 
   if (record) {
     console.log('content found, deleting...');
-    const result = await deleteRecord(context.locals.runtime.env.D1, {
+    const result = await deleteRecord(context.locals.runtime.env.DB, {
       id,
       table: tableName
     });

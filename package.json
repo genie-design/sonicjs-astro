@@ -11,9 +11,9 @@
     "test": "vitest run",
     "test:watch": "vitest run",
     "db:generate": "drizzle-kit generate",
-    "db:migrate:local": "wrangler d1 migrations apply sonicjs-astro --local",
-    "db:migrate:prod": "wrangler d1 migrations apply sonicjs-astro  --remote",
-    "db:migrate:preview": "wrangler d1 migrations apply --env preview sonicjs-astro --remote",
+    "db:migrate:local": "wrangler d1 migrations apply bdb --local",
+    "db:migrate:prod": "wrangler d1 migrations apply bdb --remote",
+    "db:migrate:preview": "wrangler d1 migrations apply --env preview bdb --remote",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json,astro}' --config ./prettier.config.mjs"
   },
   "dependencies": {
@@ -45,6 +45,6 @@
     "prettier": "^3.4.2",
     "prettier-plugin-astro": "^0.14.1",
     "vitest": "^2.1.1",
-    "wrangler": "^3.78.11"
+    "wrangler": "^3.96.0"
   }
 }

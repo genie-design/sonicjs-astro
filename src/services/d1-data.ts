@@ -4,12 +4,14 @@ import { tableSchemas } from '../db/routes';
 import qs from 'qs';
 
 export async function getAllContent(db) {
+  console.log('bam d1-data', db)
   const { results } = await db.prepare('SELECT * FROM users').all();
   return results;
 }
 
 export async function getD1DataByTable(db, table, params) {
   const sql = generateSelectSql(table, params);
+  console.log('bam d1-data getD1DataByTable', db)
   const { results } = await db.prepare(sql).all();
   return params?.id ? results[0] : results;
 }
@@ -47,6 +49,7 @@ export function generateSelectSql(table, params) {
 }
 
 export async function getD1ByTableAndId(db, table, id, params) {
+  console.log('bam d1-data getD1ByTableAndId', db)
   const { results } = await db
     .prepare(`SELECT * FROM ${table} where id = '${id}';`)
     .all();
@@ -209,7 +212,6 @@ export function processCondition(condition) {
   switch (condition) {
     case '$eq':
       return '=';
-      break;
 
     default:
       break;

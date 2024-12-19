@@ -9,7 +9,7 @@ import { getRecords } from '@/services/data';
 
 export const hasUser = async (ctx: AppContext) => {
   const fn = async function () {
-    const db = drizzle(ctx.locals.runtime.env.D1, schema);
+    const db = drizzle(ctx.locals.runtime.env.DB, schema);
     const data = await db.query.users.findMany({
       with: {
         keys: {

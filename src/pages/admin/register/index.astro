@@ -43,7 +43,7 @@ if (Astro.request.method === 'POST') {
           role: usersCount[0].count === 0 ? 'admin' : 'user'
         }
       });
-      return Astro.redirect('/auth/login');
+      return Astro.redirect('/admin/login');
     }
   } catch (error) {
     if (error instanceof Error) {

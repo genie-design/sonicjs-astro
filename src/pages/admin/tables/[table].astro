@@ -7,7 +7,7 @@ import { getFieldDefinitions } from '../../../services/fields';
 const { table } = Astro.params;
 const tableConfigRecord = apiConfig.find((t) => t.route === table);
 if (!tableConfigRecord) {
-  return;
+  return new Response(null, { status: 404 });
 }
 const formFields = getFieldDefinitions(tableConfigRecord);
 ---

@@ -26,5 +26,8 @@ database_id = "data-base-id-is-here"
 7. Go to http://localhost:4321/admin/register to create an account
 	- Since it is the first account it will be the admin account
 8. You will be redirected to http://localhost:4321/admin/login to login
-9. 
+9. You will also be logged in at http://localhost:4321
+10. You can open a private/incognito window to create and login to a new account
+11. From the admin account you can see the database data, like if the form at http://localhost:4321/contact is submitted you can see it at http://localhost:4321/admin/tables/user-comments
+12. Or you can run sql commands from the command line, like `npx wrangler d1 execute bdb --command="SELECT * FROM user_comments;"`
 

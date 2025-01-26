@@ -1,0 +1,52 @@
+---
+const { field } = Astro.props;
+---
+
+{
+  (field.type === "file" || field.type === "file[]") && (
+    <div class="sm:col-span-4">
+      <label
+        for={field.key}
+        class="block text-sm font-medium leading-6 text-white"
+      >
+        {field.key}
+      </label>
+      <div class="mt-2">
+        <div id={`uppy-${field.key}`}></div>
+      </div>
+    </div>
+  )
+}
+
+<script define:vars={{ field }}>
+  import Uppy from '@uppy/core';
+  import Dashboard from '@uppy/dashboard';
+  import Tus from '@uppy/tus';
+  import '@uppy/core/dist/style.min.css';
+  import '@uppy/dashboard/dist/style.min.css';
+
+  const uppy = new Uppy()
+    .use(Dashboard, {
+      inline: true,
+      target: `#uppy-${field.key}`,
+      height: 300,
+      theme: 'dark'
+    })
+    .use(Tus, {
+      endpoint: '/api/tus',
+      headers: {
+        'sonic-route': document.location.pathname.split('/forms/')[1].split('/')[0],
+        'sonic-field': field.key,
+        'sonic-mode': document.location.pathname.includes('/forms/') ? 'create' : 'update',
+        'data-id': document.location.pathname.split('/').pop()
+      }
+    });
+
+  uppy.on('complete', (result) => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = field.key;
+    input.value = result.successful[0].response.uploadURL;
+    document.querySelector('form').appendChild(input);
+  });
+</script>

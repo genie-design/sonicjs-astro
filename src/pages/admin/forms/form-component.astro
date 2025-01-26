@@ -3,6 +3,7 @@ import { apiConfig } from "../../../db/routes";
 import { getFieldDefinitions } from "../../../services/fields";
 import TextField from "./fields/text-field.astro";
 import TextArea from "./fields/text-area.astro";
+import FileField from "./fields/file-field.astro";
 
 const { record, title = "Edit" } = Astro.props;
 const { form } = Astro.params;
@@ -25,6 +26,7 @@ const tableConfig = getFieldDefinitions(tableConfigRecord, record);
               <div class="mt-4">
                 <TextField field={field} />
                 <TextArea field={field} />
+                <FileField field={field} />
               </div>
             ))
           }

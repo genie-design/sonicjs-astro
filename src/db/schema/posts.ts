@@ -59,7 +59,7 @@ export const access: ApiConfig["access"] = {
       if (isAdmin(ctx)) {
         return true;
       } else {
-        const user = Astro.locals.user;
+        const user = ctx.locals.user;
         if (user?.userId) {
           // Return filter so update doesn't happen if userId doesn't match
           return {
@@ -74,7 +74,7 @@ export const access: ApiConfig["access"] = {
       if (isAdmin(ctx)) {
         return true;
       } else {
-        const user = Astro.locals.user;
+        const user = ctx.locals.user;
         if (user?.userId) {
           // Return filter so update doesn't happen if userId doesn't match
           return {

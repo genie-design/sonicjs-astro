@@ -155,7 +155,7 @@ export const POST: APIRoute = async (context) => {
   const route = params.table;
   let entry;
   try {
-    entry = await apiConfig.find((tbl) => tbl.route === route);
+    entry = apiConfig.find((tbl) => tbl.route === route);
     if (!entry) {
       throw new Error(`Table "${route}" not defined in your schema`);
     }
@@ -168,7 +168,6 @@ export const POST: APIRoute = async (context) => {
     );
   }
 
-  // const db = drizzle(env.D1);
 
   const request = context.request;
 
@@ -181,28 +180,28 @@ export const POST: APIRoute = async (context) => {
     content.data = await entry.hooks.resolveInput.create(context, content.data);
   }
 
-  // let authorized = await getOperationCreateResult(
-  //   entry?.access?.operation?.create,
-  //   content,
-  //   content.data
-  // );
-  // if (!authorized) {
-  //   return return400();
-  // }
+  let authorized = await getOperationCreateResult(
+    entry?.access?.operation?.create,
+    context,
+    content.data
+  );
+  if (!authorized) {
+    return return400();
+  }
 
   try {
     console.log("posting new record content", JSON.stringify(content, null, 2));
-    // content.data = await filterCreateFieldAccess(
-    //   entry?.access?.fields,
-    //   context,
-    //   content.data
-    // );
-    // if (entry?.hooks?.resolveInput?.create) {
-    //   content.data = await entry.hooks.resolveInput.create(
-    //     context,
-    //     content.data
-    //   );
-    // }
+    content.data = await filterCreateFieldAccess(
+      entry?.access?.fields,
+      context,
+      content.data
+    );
+    if (entry?.hooks?.resolveInput?.create) {
+      content.data = await entry.hooks.resolveInput.create(
+        context,
+        content.data
+      );
+    }
 
     if (entry.hooks?.beforeOperation) {
       await entry.hooks.beforeOperation(content, "create", undefined, content);

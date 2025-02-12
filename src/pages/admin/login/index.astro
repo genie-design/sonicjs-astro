@@ -2,7 +2,6 @@
 import LoginLayout from '../layouts/admin-login.astro';
 
 const errors = { email: '', password: '' };
-const redirectTo = '/admin';
 
 if (Astro.request.method === 'POST') {
   try {
@@ -51,7 +50,7 @@ if (Astro.request.method === 'POST') {
               maxAge: 60 * 60 * 24 * 14 // 14 days
             });
 
-            return Astro.redirect(redirectTo);
+            return Astro.redirect('/admin');
           } else {
             errors.password = 'Invalid email or password';
           }
@@ -79,11 +78,6 @@ if (Astro.request.method === 'POST') {
 <LoginLayout title='Login: SonicJs Admin'>
   <div class='flex min-h-full flex-col justify-center px-6 py-12 lg:px-8'>
     <div class='sm:mx-auto sm:w-full sm:max-w-sm'>
-      <img
-        class='mx-auto h-10 w-auto'
-        src='https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500'
-        alt='Your Company'
-      />
       <h2
         class='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white'
       >

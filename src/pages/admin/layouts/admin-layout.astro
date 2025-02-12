@@ -2,13 +2,10 @@
 import { apiConfig } from "../../../db/routes";
 
 export const prerender = true;
-// import BaseHead from '../components/BaseHead.astro';
-// import Footer from '../components/Footer.astro';
 const { title } = Astro.props;
 
 const tables = apiConfig.filter((t) => t.route !== 'users')
 import SonicJsLogo from '../../../../public/images/sonicjs-logo.svg';
-import { Picture } from "astro:assets";
 import { Image } from 'astro:assets';
 
 

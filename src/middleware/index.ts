@@ -1,6 +1,8 @@
 import { defineMiddleware } from 'astro:middleware';
 import { initializeConfig } from '@/auth/config';
 import { Auth } from '@/auth/auth';
+import { count } from 'drizzle-orm';
+import { table as userSchema } from '@/db/schema/users';
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const config = initializeConfig(
@@ -38,6 +40,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
     // If no valid session and trying to access protected routes, redirect to login
     if (context.url.pathname.startsWith('/admin')) {
+      const usersCount = await context.locals.auth.config.db
+        .select({ count: count() })
+        .from(userSchema);
+
+      if (usersCount[0].count === 0) {
+        return context.redirect('/admin/register');
+      }
       return context.redirect('/admin/login');
     }
   } catch (error) {

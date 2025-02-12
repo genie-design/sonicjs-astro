@@ -5,7 +5,6 @@ import {
   getCoreRowModel,
   type SortingState,
   getSortedRowModel,
-  type ColumnDef,
   getPaginationRowModel,
   getFilteredRowModel
 } from '@tanstack/react-table';
@@ -17,19 +16,14 @@ import {
   PlusIcon
 } from '@heroicons/react/20/solid';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import DeleteConfirmation from './delete-confirmation';
 import { Button } from '@headlessui/react';
 import { TableSearch } from './table-search';
 
 const columnHelper = createColumnHelper();
 
-const fallbackData = [
-  {
-    id: '1',
-    title: 'Record 1'
-  }
-];
+const fallbackData = [];
 
 function Table({
   tableConfig,

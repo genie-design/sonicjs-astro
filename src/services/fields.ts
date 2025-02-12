@@ -1,6 +1,9 @@
 import type { ApiConfig } from '@/db/routes';
 
-export const getFieldDefinitions = (tableConfig: ApiConfig, record?: any) => {
+export const getFieldDefinitions = (tableConfig?: ApiConfig, record?: any) => {
+  if (!tableConfig) {
+    return [];
+  }
   const definitionObject = tableConfig.definition;
 
   // Convert the nested objects to an array

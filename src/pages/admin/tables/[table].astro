@@ -6,16 +6,17 @@ import { getFieldDefinitions } from '../../../services/fields';
 
 const { table } = Astro.params;
 const tableConfigRecord = apiConfig.find((t) => t.route === table);
-if (!tableConfigRecord) {
-  return;
-}
 const formFields = getFieldDefinitions(tableConfigRecord);
 ---
 
-<AdminLayout title=`SonicJs Admin` | {table} `>
-  <TableComponent
-    client:load
-    tableConfig={tableConfigRecord}
-    formFields={formFields}
-  />
-</AdminLayout>
+{
+  tableConfigRecord ?
+    <AdminLayout title={`SonicJs Admin`} {table}>
+      <TableComponent
+        client:load
+        tableConfig={tableConfigRecord}
+        formFields={formFields}
+      />
+    </AdminLayout>
+  : <p class='text-red-500'>Table configuration not found.</p>
+}

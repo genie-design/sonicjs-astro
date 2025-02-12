@@ -37,9 +37,6 @@ export const GET: APIRoute = async (context) => {
     );
   }
 
-  const { env } = context.locals.runtime;
-  // const db = drizzle(env.D1);
-
   const request = context.request;
 
   const query =

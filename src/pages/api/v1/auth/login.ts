@@ -14,17 +14,19 @@ export const POST: APIRoute = async (context) => {
   const contentType = context.request.headers.get("content-type");
   if (context.request.headers.get("content-type") === "application/json") {
     // Get the body of the request
-    const body: { email: string; password: string } = await context.request.json();
+    const body: { email: string; password: string } =
+      await context.request.json();
     const { email, password } = body;
+    console.log("body", body, email, password);
 
     // const hashedPasseord =  await hashString(password);
     // console.log('hashedPasseord', hashedPasseord);
 
-    const loginResult = await login(
+    const loginResult = (await login(
       context.locals.runtime.env.D1,
       email,
       password
-    ) as { bearer: string; expires: string };
+    )) as { bearer: string; expires: string };
 
     if (loginResult) {
       console.log("body", body, email, password);

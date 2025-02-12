@@ -22,6 +22,7 @@ export const login = async (
   const user = record[0];
 
   let userPassword = user?.password;
+  console.log("userPassword", { password, userPassword });
   if (!user) {
     return null;
   }

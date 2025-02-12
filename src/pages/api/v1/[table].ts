@@ -168,13 +168,10 @@ export const POST: APIRoute = async (context) => {
     );
   }
 
-
   const request = context.request;
 
   let content: { data: any; table?: string } = { data: {}, table: entry.table };
   content.data = await request.json();
-  // const table = apiConfig.find((entry) => entry.route === route).table;
-  // context.env.D1DATA = context.env.D1DATA;
 
   if (entry?.hooks?.resolveInput?.create) {
     content.data = await entry.hooks.resolveInput.create(context, content.data);
@@ -207,22 +204,44 @@ export const POST: APIRoute = async (context) => {
       await entry.hooks.beforeOperation(content, "create", undefined, content);
     }
 
-    const result = await insertRecord(env.D1, {}, content);
-    console.log("create result", result);
+    content.table = entry.table;
 
-    if (entry?.hooks?.afterOperation) {
-      await entry.hooks.afterOperation(
-        context,
-        "create",
-        result?.data?.["id"],
-        content,
-        result
+    try {
+      console.log(
+        "posting new record content",
+        JSON.stringify(content, null, 2)
       );
+      content.data = await filterCreateFieldAccess(
+        entry?.access?.fields,
+        context,
+        content.data
+      );
+      if (entry?.hooks?.resolveInput?.create) {
+        content.data = await entry.hooks.resolveInput.create(
+          context,
+          content.data
+        );
+      }
+      const result = await insertRecord(env.D1, {}, content);
+      console.log("create result", result);
+
+      if (entry?.hooks?.afterOperation) {
+        await entry.hooks.afterOperation(
+          context,
+          "create",
+          result?.data?.["id"],
+          content,
+          result
+        );
+      }
+      return new Response(JSON.stringify(result), {
+        status: result?.status || 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    } catch (error) {
+      console.log("error posting content", error);
+      return return500(error);
     }
-    return new Response(JSON.stringify(result), {
-      status: result?.status || 500,
-      headers: { "Content-Type": "application/json" },
-    });
   } catch (error) {
     console.log("error posting content", error);
     return return500(error);

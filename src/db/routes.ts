@@ -161,13 +161,13 @@ export interface ApiConfig {
     beforeOperation?: (
       ctx: AppContext,
       operation: 'create' | 'read' | 'update' | 'delete',
-      id?: string,
+      id?: string | null,
       data?: any
     ) => void | Promise<void>;
     afterOperation?: (
       ctx: AppContext,
       operation: 'create' | 'read' | 'update' | 'delete',
-      id?: string,
+      id?: string | null,
       data?: any,
       result?: { data?: any } & Record<string, any>
     ) => void | Promise<void>;
